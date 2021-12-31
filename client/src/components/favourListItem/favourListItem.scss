@@ -1,0 +1,26 @@
+div.favourListItem {
+  margin-bottom: 30px;
+
+  .css-1s8qwjp-MuiPaper-root {
+    max-width: 700px;
+    padding: 0px;
+    border-radius: 0px;
+    .css-mhc70k-MuiGrid-root > .MuiGrid-item {
+      padding-top: 0px;
+    }
+    .css-f598hh-MuiButtonBase-root {
+      width: 140px;
+      height: 135px;
+      img {
+        width: 140px;
+        height: 135px;
+      }
+    }
+    .css-btlb3t-MuiTypography-root{
+      margin: 20px;
+    }
+    span {
+      color: rgb(112, 109, 109);
+    }
+  }
+}
