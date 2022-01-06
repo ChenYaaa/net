@@ -1,4 +1,5 @@
-import Navbar from "../../components/navbar/Navbar";
+// import Navbar from "../../components/navbar/Navbar";
+import Sidebar from "../../components/sidebar/Sidebar";
 import FavourList from "../../components/favourList/favourList";
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
@@ -34,11 +35,12 @@ const AddList = () => {
       console.error();
     }
     getAll(username);
-  }, [user,username]);
+  }, [user, username]);
   console.log(favour);
   return (
     <div className="addList">
       {/* <Navbar /> */}
+      <Sidebar />
       <FavourList favour={favour} />
     </div>
   );

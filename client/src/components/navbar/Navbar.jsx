@@ -29,11 +29,17 @@ const Navbar = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  let mounted = true;
 
-  
   window.onscroll = () => {
-    setIsScrolled(window.pageYOffset === 0 ? false : true);
-    return () => (window.onscroll = null);
+    if (mounted) {
+      setIsScrolled(window.pageYOffset === 0 ? false : true);
+    }
+    // return () => (window.onscroll = null);
+    return () => {
+      mounted = false;
+      window.onscroll = null;
+    };
   };
   return (
     <div className={isScrolled ? "navbar scrolled" : "navbar"}>
