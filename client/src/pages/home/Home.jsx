@@ -14,6 +14,7 @@ const Home = ({ type }) => {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
+    let mounted = true;
     if (user) {
       const user = JSON.parse(localStorage.getItem("user"));
       setUsername(user.username);
@@ -26,13 +27,16 @@ const Home = ({ type }) => {
         const res = await axios.get(
           `lists${type ? "?type=" + type : ""}${genre ? "&genre=" + genre : ""}`
         );
-        setLists(res.data);
+        if (mounted) {
+          setLists(res.data);
+        }
         console.log(res.data[0]);
       } catch (err) {
         console.log(err);
       }
     };
     getRandomLists();
+    return () => (mounted = false);
   }, [type, genre, user]);
   // console.log(username);
   console.log(lists);

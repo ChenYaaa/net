@@ -1,10 +1,15 @@
 div.favourListItem {
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 
   .css-1s8qwjp-MuiPaper-root {
+    // margin-top: 30px;
     max-width: 700px;
     padding: 0px;
     border-radius: 0px;
+    background-color: black;
+    box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.4),
+      0px 0px 35px rgba(255, 255, 255, 0.2) inset;
+    color: white;
     .css-mhc70k-MuiGrid-root > .MuiGrid-item {
       padding-top: 0px;
     }
@@ -16,7 +21,10 @@ div.favourListItem {
         height: 135px;
       }
     }
-    .css-btlb3t-MuiTypography-root{
+    p{
+      color: white;
+    }
+    .css-btlb3t-MuiTypography-root {
       margin: 20px;
     }
     span {

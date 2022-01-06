@@ -35,12 +35,12 @@ export default function Login() {
           <input
             type="email"
             placeholder="Email or phone number"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value.toLowerCase())}
           />
           <input
             type="password"
             placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value.toLowerCase())}
           />
           <button className="loginButton" onClick={handleLogin}>
             Sign In

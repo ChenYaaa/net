@@ -27,7 +27,7 @@ const style = {
   p: 4,
 };
 
-export default function ListItem({ index, item,username  }) {
+export default function ListItem({ index, item, username }) {
   const { user } = useContext(AuthContext);
   const [isHovered, setIsHovered] = useState(false);
   const [movie, setMovie] = useState({});
@@ -60,16 +60,19 @@ export default function ListItem({ index, item,username  }) {
     }
   };
   useEffect(() => {
+    let mounted = true;
     const getMovie = async () => {
       try {
         const res = await axios.get("/movies/find/" + item);
-        setMovie(res.data);
+        if (mounted) {
+          setMovie(res.data);
+        }
       } catch (err) {
         console.log(err);
       }
     };
     getMovie();
-   
+    return () => (mounted = false);
   }, [item]);
   // console.log(movie);
   // console.log(username);
