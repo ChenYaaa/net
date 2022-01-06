@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRef } from "react";
 import { useState } from "react";
-import { useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import imageUrl from "../../images/logo2.png";
 import "./register.scss";
 
@@ -12,19 +12,19 @@ export default function Register() {
   const history = useHistory();
 
   const emailRef = useRef();
-  const passwordRef = useRef();
-  const usernameRef = useRef();
+  // const passwordRef = useRef();
+  // const usernameRef = useRef();
 
   const handleStart = () => {
     setEmail(emailRef.current.value);
   };
- 
+
   const handleFinish = async (e) => {
     e.preventDefault();
-    setPassword(passwordRef.current.value);
-    setUsername(usernameRef.current.value);
-    try{
-      await axios.post("auth/register", { email,username, password });
+    // setPassword(passwordRef.current.value);
+    // setUsername(usernameRef.current.value);
+    try {
+      await axios.post("auth/register", { email, username, password });
       history.push("/login");
     } catch (err) {
       throw new Error();
@@ -39,8 +39,8 @@ export default function Register() {
             src={imageUrl}
             alt=""
           />
-            {/* <button className="loginButton" ><Link to={{ pathname: "/login"}}>sign in</Link></button>  */}
-          
+          {/* <button className="loginButton" ><Link to={{ pathname: "/login"}}>sign in</Link></button>  */}
+
         </div>
       </div>
       <div className="container">
@@ -58,8 +58,19 @@ export default function Register() {
           </div>
         ) : (
           <form className="input">
-            <input type="username" placeholder="username" ref={usernameRef} />
-            <input type="password" placeholder="password" ref={passwordRef} />
+            {/* <input type="username" placeholder="username" ref={usernameRef} />
+            <input type="password" placeholder="password" ref={passwordRef} /> */}
+            {/* 周震： 修改为受控组件 */}
+            <input
+              type="username"
+              onChange={e => setUsername(e.target.value)}
+              placeholder="username"
+              value={username} />
+            <input
+              type="password"
+              onChange={e => setPassword(e.target.value)}
+              placeholder="password"
+              value={password} />
             <button className="registerButton" onClick={handleFinish}>
               Start
             </button>

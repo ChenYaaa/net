@@ -7,20 +7,23 @@ const userRoute = require("./routes/users");
 const movieRoute = require("./routes/movies");
 const listRoute = require("./routes/lists");
 
-dotenv.config({path:'.env'});
+dotenv.config({ path: '.env' });
 mongoose.set('useFindAndModify', false)
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
+    authSource: 'admin',
+    user:"root",
+    pass: "123456"
   })
   .then(() => console.log("DB Connection Successfull"))
   .catch((err) => {
     console.error(err);
   });
 
-  app.use(express.static('public'))
+app.use(express.static('public'))
 app.use(express.json());
 
 app.use("/api/auth", authRoute);
