@@ -28,7 +28,7 @@ const Home = ({ type }) => {
           `lists${type ? "?type=" + type : ""}${genre ? "&genre=" + genre : ""}`
         );
         if (mounted) {
-          setLists(res.data);
+          setLists(JSON.parse(res.data));
         }
         console.log(res.data[0]);
       } catch (err) {
@@ -44,9 +44,9 @@ const Home = ({ type }) => {
     <div className="home">
       <Navbar />
       <Featured type={type} setGenre={setGenre} />
-      {lists.map((list, el) => (
+      {lists.length > 0 ? lists.map((list, el) => (
         <List list={list} key={el} username={username} />
-      ))}
+      )) : ""}
     </div>
   );
 };

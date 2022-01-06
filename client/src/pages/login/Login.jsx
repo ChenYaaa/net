@@ -14,13 +14,16 @@ export default function Login() {
   const { dispatch } = useContext(AuthContext);
   const history = useHistory();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     // if (!email || !password) {
     //   alert("email or password can not be empty");
     // }
-    login({ email, password }, dispatch);
-    history.push("/");
+    try {
+      await login({ email, password }, dispatch);
+      history.push("/");
+    } catch (err) {
+    }
   };
   return (
     <div className="login">
