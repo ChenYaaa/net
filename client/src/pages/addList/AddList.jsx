@@ -36,13 +36,13 @@ const AddList = () => {
     }
     getAll(username);
   }, [user, username]);
-  console.log(favour);
+
   console.log(username);
   return (
     <div className="addList">
       {/* <Navbar /> */}
       <Sidebar />
-      {favour ? (
+      {favour.length === 0 ? (
         <>
           <FavourList favour={favour} />
         </>
