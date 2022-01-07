@@ -41,7 +41,7 @@ const AddList = () => {
   console.log(favour);
   return (
     <div className="addList">
-      {/* <Navbar /> */}
+      {/* <Navbar /> okok*/}
       <Sidebar />
       {favour.length !== 0 ? (
         <>
