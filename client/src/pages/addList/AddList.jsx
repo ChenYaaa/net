@@ -38,11 +38,12 @@ const AddList = () => {
   }, [user, username]);
 
   console.log(username);
+  console.log(favour);
   return (
     <div className="addList">
       {/* <Navbar /> */}
       <Sidebar />
-      {favour.length === 0 ? (
+      {favour.length !== 0 ? (
         <>
           <FavourList favour={favour} />
         </>
