@@ -6,7 +6,7 @@ import FavourListItem from "../favourListItem/FavourListItem";
 
 const FavourList = ({ favour }) => {
 
-
+  // console.log(favour)
   useEffect(() => {}, []);
   return (
     <div className="favourList">

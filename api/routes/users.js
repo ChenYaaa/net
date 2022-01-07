@@ -140,7 +140,7 @@ router.post("/favour/post/:username", verify, function (req, res) {
       console.log("This movie has been collected, collection failed!");
       console.log(user.favour);
     } else {
-      user.favour.push(postData);
+      user.favour.unshift(postData);
       return user.save().then((newUser) => {
         res.status(200).json(newUser);
         console.log("Collection of success!");

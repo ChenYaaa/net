@@ -37,11 +37,22 @@ const AddList = () => {
     getAll(username);
   }, [user, username]);
   console.log(favour);
+  console.log(username);
   return (
     <div className="addList">
       {/* <Navbar /> */}
       <Sidebar />
-      <FavourList favour={favour} />
+      {favour ? (
+        <>
+          <FavourList favour={favour} />
+        </>
+      ) : (
+        <>
+          <div className="noFavour">
+            You haven't added the video yet, go ahead and add it
+          </div>
+        </>
+      )}
     </div>
   );
 };

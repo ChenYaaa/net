@@ -28,7 +28,7 @@ const Home = ({ type }) => {
           `lists${type ? "?type=" + type : ""}${genre ? "&genre=" + genre : ""}`
         );
         if (mounted) {
-          setLists(JSON.parse(res.data));
+          setLists(res.data);
         }
         console.log(res.data[0]);
       } catch (err) {

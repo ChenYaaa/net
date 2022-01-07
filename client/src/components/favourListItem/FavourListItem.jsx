@@ -14,6 +14,7 @@ const Img = styled("img")({
 });
 
 const FavourListItem = ({ item }) => {
+  // console.log(item)
   const [date, setDate] = useState("");
   function rTime(date) {
     var json_date = new Date(date).toJSON();
@@ -28,6 +29,7 @@ const FavourListItem = ({ item }) => {
   }, [item.postTime]);
   return (
     <div className="favourListItem">
+      <div>{item._id}</div>
       <Paper sx={{ p: 2, margin: "auto", maxWidth: 500, flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item>
