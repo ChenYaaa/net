@@ -10,17 +10,11 @@ import {
   Route,
   // Redirect,
 } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "./authContext/AuthContext";
+// import { useContext } from "react";
+// import { AuthContext } from "./authContext/AuthContext";
 
 const App = () => {
-  const { user } = useContext(AuthContext);
-  // const [username, setUsername] = useState("");
-  // useEffect(() => {
-  //   const user = JSON.parse(localStorage.getItem("user"));
-  //   setUsername(user.username);
-
-  // }, []);
+  // const { user } = useContext(AuthContext);
 
   return (
     <Router>
@@ -43,7 +37,9 @@ const App = () => {
         <Route path="/watch">
           <Watch />
         </Route>
-        <Route path="/addList">{user ? <AddList /> : <></>}</Route>
+        <Route path="/myList">
+          <AddList />
+        </Route>
       </Switch>
     </Router>
   );

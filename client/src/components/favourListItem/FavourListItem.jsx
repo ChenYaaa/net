@@ -4,6 +4,8 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
+import { Link } from "react-router-dom";
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import "./favourListItem.scss";
 
 const Img = styled("img")({
@@ -34,7 +36,12 @@ const FavourListItem = ({ item }) => {
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase sx={{ width: 128, height: 128 }}>
-              <Img alt="complex" src={item.img} />
+              <div className="play">
+                <Img alt="complex" src={item.img} />
+                <Link  to={{ pathname: "/watch", movie: item }}>
+                 <PlayCircleIcon/>
+                </Link>
+              </div>
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>

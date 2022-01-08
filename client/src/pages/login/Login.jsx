@@ -3,9 +3,6 @@ import { login } from "../../authContext/apiCalls";
 import { AuthContext } from "../../authContext/AuthContext";
 import imageUrl from "../../images/logo2.png";
 import { Link, useHistory } from "react-router-dom";
-// import Alert from "@mui/material/Alert";
-// import AlertTitle from "@mui/material/AlertTitle";
-// import Stack from "@mui/material/Stack";
 import "./login.scss";
 
 export default function Login() {

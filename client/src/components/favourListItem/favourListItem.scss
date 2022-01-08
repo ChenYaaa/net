@@ -1,6 +1,25 @@
 div.favourListItem {
   margin-bottom: 50px;
-
+  div.play {
+    position: relative;
+    a,
+    a:visited {
+      text-decoration: none;
+      position: absolute;
+      top: 50px;
+      left: 49px;
+      display: none;
+    }
+    .css-i4bv87-MuiSvgIcon-root {
+      
+      color: white;
+    }
+    &:hover {
+      a {
+        display: block;
+      }
+    }
+  }
   .css-1s8qwjp-MuiPaper-root {
     // margin-top: 30px;
     max-width: 550px;
@@ -21,7 +40,7 @@ div.favourListItem {
         height: 135px;
       }
     }
-    p{
+    p {
       color: white;
     }
     .css-btlb3t-MuiTypography-root {

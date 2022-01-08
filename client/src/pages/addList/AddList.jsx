@@ -8,7 +8,7 @@ import "./addList.scss";
 
 const AddList = () => {
   const [favour, setFavour] = useState([]);
-  const [username, setUsername] = useState("chen");
+  const [username, setUsername] = useState("");
   const { user } = useContext(AuthContext);
   const getAll = async (username) => {
     if (username === "") {
@@ -31,6 +31,7 @@ const AddList = () => {
     if (user) {
       const user = JSON.parse(localStorage.getItem("user"));
       setUsername(user.username);
+      console.log(username);
     } else {
       console.error();
     }
@@ -43,17 +44,31 @@ const AddList = () => {
     <div className="addList">
       {/* <Navbar /> okok*/}
       <Sidebar />
-      {favour.length !== 0 ? (
-        <>
-          <FavourList favour={favour} />
-        </>
-      ) : (
-        <>
-          <div className="noFavour">
-            You haven't added the video yet, go ahead and add it
-          </div>
-        </>
-      )}
+      <div className="container">
+        <div className="left_container">
+          {favour.length !== 0 ? (
+            <>
+              <div className="search_input">
+                <input
+                  className="inputText"
+                  type="text"
+                  placeholder="Search movies...."
+                />
+                <button className="inputButton">Search</button>
+              </div>
+
+              <FavourList favour={favour} />
+            </>
+          ) : (
+            <>
+              <div className="noFavour">
+                <p> You haven't added the video yet, go ahead and add it</p>
+              </div>
+            </>
+          )}
+        </div>
+        <div className="right_container"></div>
+      </div>
     </div>
   );
 };

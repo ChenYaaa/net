@@ -14,9 +14,45 @@ body {
   margin-top: 90px;
   background-color: white !important;
 }
-div.addList{
-  div.noFavour{
-    margin-top: 300px;
+div.addList {
+  div.noFavour {
+    text-align: center;
     color: white;
+  }
+  div.container {
+    // border: 1px solid white;
+    margin-left: 240px;
+    margin-right: 40px;
+    display: flex;
+    div.left_container {
+      flex: 6;
+      // border: 1px solid white;
+      div.search_input {
+        width: 550px;
+        // margin-left: 90px;
+        margin: 0 auto 30px;
+        input.inputText {
+          width: 480px;
+          height: 40px;
+          background-color: gray;
+          outline: none;
+          // border-radius: 15px;
+        }
+        input::-webkit-input-placeholder {
+          color: black;
+          font-size: 12px;
+        }
+        button.inputButton {
+          // width: 480px;
+          // border-radius: 18px;
+          height: 40px;
+          outline: none;
+          // background-color: gray;
+        }
+      }
+    }
+    div.right_container {
+      flex: 4;
+    }
   }
 }

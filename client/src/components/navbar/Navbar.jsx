@@ -61,7 +61,7 @@ const Navbar = () => {
             <span className="navbarmainLinks">Movies</span>
           </Link>
           <span>New and Popular</span>
-          <Link to="/addList" className="link">
+          <Link to="/myList" className="link">
             <span>My List</span>
           </Link>
         </div>
@@ -77,7 +77,13 @@ const Navbar = () => {
             <ArrowDropDown className="icon" />
             <div className="options">
               <span>Settings</span>
-              <span onClick={() => dispatch(logout())}>Logout</span>
+              <span
+                onClick={() => {
+                  dispatch(logout());
+                }}
+              >
+                Logout
+              </span>
             </div>
           </div>
           {user ? (
