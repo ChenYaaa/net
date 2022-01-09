@@ -4,6 +4,8 @@ import FavourList from "../../components/favourList/favourList";
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../authContext/AuthContext";
+import Input from '@mui/material/Input';
+
 import "./addList.scss";
 
 const AddList = () => {
@@ -59,7 +61,16 @@ const AddList = () => {
             </>
           )}
         </div>
-        <div className="right_container"></div>
+        <div className="right_container">
+          <div className="search_inout">
+            <p>jjjjj</p>
+            <p>jjjjj</p>
+            <p>jjjjj</p>
+            <p>jjjjj</p>
+            <p>jjjjj</p>
+            <p>jjjjj</p>
+          </div>
+        </div>
       </div>
     </div>
   );

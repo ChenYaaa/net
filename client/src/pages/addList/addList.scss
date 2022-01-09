@@ -16,24 +16,39 @@ body {
 }
 div.addList {
   div.noFavour {
-    text-align: center;
+    text-align: left;
     color: white;
   }
   div.container {
     // border: 1px solid white;
-    margin-left: 240px;
+    position: relative;
+    margin-left: 250px;
     // margin-right: 40px;
-    display: flex;
+    // display: flex;
+    width: 80%;
+
     div.left_container {
-      flex: 6;
+      // flex: 6;
       // border: 1px solid white;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 60%;
+      float: left;
       h2{
         color: white;
         margin-bottom: 20px;
       }
     }
     div.right_container {
-      flex: 4;
+      position: absolute;
+      top: 56px;
+      right: 0;
+      // flex: 4;
+      width: 38%;
+      margin-right: 20px;
+      margin-left: 20px;
+      border: 1px solid white;
     }
   }
 }
