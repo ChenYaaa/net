@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema(
     profilePic: { type: String, defaut: "" },
     isAdmin: { type: Boolean, default: false },
     favour: { type: Array },
+    record: { type: Array },
   },
   { timestamps: true }
 );

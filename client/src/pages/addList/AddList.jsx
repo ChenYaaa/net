@@ -48,15 +48,7 @@ const AddList = () => {
         <div className="left_container">
           {favour.length !== 0 ? (
             <>
-              <div className="search_input">
-                <input
-                  className="inputText"
-                  type="text"
-                  placeholder="Search movies...."
-                />
-                <button className="inputButton">Search</button>
-              </div>
-
+              <h2>Collection of records</h2>
               <FavourList favour={favour} />
             </>
           ) : (
