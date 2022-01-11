@@ -45,7 +45,7 @@ const AddList = ({username}) => {
   console.log(favour);
   return (
     <div className="addList">
-      {/* <Navbar /> */}
+      {/* <Navbar /> kk*/}
       <Sidebar />
       <div className="container">
         <div className="left_container">
