@@ -10,10 +10,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteAllFavour } from "../../api/userFavour";
 import "./addList.scss";
 
-const AddList = ({username}) => {
+const AddList = ({ username }) => {
   const [favour, setFavour] = useState([]);
-  const [keyWord, setkeyWord] = useState('');
-  
+  // const [searchFavour, setSearchFavour] = useState([]);
+  const [keyWord, setkeyWord] = useState("");
+
   useEffect(() => {
     const getAll = async (username) => {
       if (username === "") {
@@ -36,11 +37,37 @@ const AddList = ({username}) => {
     getAll(username);
     // return ()=>clearInterval(timer)
   }, [username]);
-  const handleDeleteAll = (username) => {
+  const handleDeleteAll = (e, username) => {
+    e.preventDefault();
     deleteAllFavour(username);
   };
 
-  const handelSearch=()=>{}
+  let search = false;
+
+  const keydownSearch = (e) => {
+    if (e.keyCode === 13) {
+      search = true;
+      setFavour(
+        favour.filter(function (product) {
+          return Object.keys(product).some(function (key) {
+            return String(product[key]).toLowerCase().indexOf(keyWord) > -1;
+          });
+        })
+      );
+    }
+  };
+
+  const handelSearch = (e) => {
+    e.preventDefault();
+    search = true;
+    setFavour(
+      favour.filter(function (product) {
+        return Object.keys(product).some(function (key) {
+          return String(product[key]).toLowerCase().indexOf(keyWord) > -1;
+        });
+      })
+    );
+  };
   console.log(username);
   console.log(favour);
   return (
@@ -52,7 +79,7 @@ const AddList = ({username}) => {
           {favour.length !== 0 ? (
             <>
               <h2>Collection of records</h2>
-              <FavourList favour={favour} username={username} />
+              <FavourList favour={favour} username={username} search={search} />
             </>
           ) : (
             <>
@@ -69,9 +96,13 @@ const AddList = ({username}) => {
               variant="standard"
               placeholder="search collection records....."
               value={keyWord}
-              onChange={e => setkeyWord(e.target.value)}
+              onKeyDown={keydownSearch}
+              onChange={(e) => {
+                setkeyWord(e.target.value);
+
+              }}
             />
-            <SearchIcon onClick={handelSearch}/>
+            <SearchIcon onClick={handelSearch} />
           </div>
           <div className="deleteAll">
             <DeleteIcon onClick={() => handleDeleteAll(username)} />

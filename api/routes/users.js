@@ -118,6 +118,7 @@ router.post("/favour/post/:username", verify, function (req, res) {
   let postData = {
     // username:req.body.username,
     _id: req.body._id,
+    title:req.body.title,
     imgTitle: req.body.imgTitle,
     img: req.body.img,
     trailer: req.body.trailer,
@@ -159,8 +160,6 @@ router.get("/favour/", verify, async (req, res) => {
       { username: req.query.username },
       { favour: 1 }
     );
-    // const arrFavour = user.favour;
-    // console.log(favour[0].favour)
     res.status(200).json(favour);
   } catch (err) {
     res.json(500).json(err);
@@ -212,7 +211,6 @@ router.post("/favour/deleteAll/", verify, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 
 module.exports = router;

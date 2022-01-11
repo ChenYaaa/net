@@ -42,6 +42,7 @@ export default function ListItem({ index, item, username }) {
         {
           username: username,
           _id: movie._id,
+          title:movie.title,
           imgTitle: movie.imgTitle,
           img: movie.img,
           trailer:movie.trailer,

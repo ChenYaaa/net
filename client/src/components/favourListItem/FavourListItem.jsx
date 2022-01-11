@@ -19,7 +19,8 @@ const FavourListItem = ({ item, username }) => {
       .replace(/\.[\d]{3}Z/, "");
     setDate(newdate);
   }
-  const handleDelete = (id, username) => {
+  const handleDelete = (e,id, username) => {
+    e.preventDefault();
     deleteFavour(id, username);
   };
 
@@ -47,7 +48,7 @@ const FavourListItem = ({ item, username }) => {
         </div>
 
         <div className="imgDes">
-          <h4>{item.imgTitle}</h4>
+          <h4>{item.title}</h4>
           <h4>{item._id}</h4>
           <p>{item.desc}</p>
           <p>add time：{date}</p>
