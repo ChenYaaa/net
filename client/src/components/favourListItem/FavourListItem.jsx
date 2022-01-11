@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import LinearProgress from "@mui/material/LinearProgress";
 // import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import HighlightOffTwoToneIcon from '@mui/icons-material/HighlightOffTwoTone';
+import HighlightOffTwoToneIcon from "@mui/icons-material/HighlightOffTwoTone";
+import { deleteFavour } from "../../api/userFavour";
 import "./favourListItem.scss";
 
-const FavourListItem = ({ item }) => {
+const FavourListItem = ({ item, username }) => {
   // console.log(item)
   const [isHovered, setIsHovered] = useState(false);
   const [date, setDate] = useState("");
@@ -18,6 +19,10 @@ const FavourListItem = ({ item }) => {
       .replace(/\.[\d]{3}Z/, "");
     setDate(newdate);
   }
+  const handleDelete = (id, username) => {
+    deleteFavour(id, username);
+  };
+
   useEffect(() => {
     rTime(item.postTime);
     setProgress(100);
@@ -34,7 +39,7 @@ const FavourListItem = ({ item }) => {
           {isHovered && (
             <>
               <Link to={{ pathname: "/watch", movie: item }}>
-                <video src={item.video} autoPlay={true} loop />{" "}
+                <video src={item.trailer} autoPlay={true} loop muted />{" "}
               </Link>
             </>
           )}
@@ -43,10 +48,13 @@ const FavourListItem = ({ item }) => {
 
         <div className="imgDes">
           <h4>{item.imgTitle}</h4>
+          <h4>{item._id}</h4>
           <p>{item.desc}</p>
           <p>add time：{date}</p>
         </div>
-        <HighlightOffTwoToneIcon/>
+        <HighlightOffTwoToneIcon
+          onClick={() => handleDelete(item._id, username)}
+        />
       </div>
     </div>
   );

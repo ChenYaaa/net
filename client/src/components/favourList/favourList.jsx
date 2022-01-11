@@ -4,15 +4,15 @@ import "./favourList.scss";
 import FavourListItem from "../favourListItem/FavourListItem";
 // import axios from "axios";
 
-const FavourList = ({ favour }) => {
+const FavourList = ({ username, favour}) => {
 
-  // console.log(favour)
+  console.log(username)
   useEffect(() => {}, []);
   return (
     <div className="favourList">
       <div className="movieBox">
         {favour.map((item, i) => (
-          <FavourListItem item={item} key={i} />
+          <FavourListItem item={item} key={i} username={username}/>
         ))}
       </div>
     </div>

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const CryptoJS = require("crypto-js");
 const verify = require("../verifyToken");
+// const userController = require("../controller/user");
 
 //CREATE
 router.post("/", verify, async (req, res) => {
@@ -119,8 +120,9 @@ router.post("/favour/post/:username", verify, function (req, res) {
     _id: req.body._id,
     imgTitle: req.body.imgTitle,
     img: req.body.img,
-    video:req.body.video,
-    desc:req.body.desc,
+    trailer: req.body.trailer,
+    video: req.body.video,
+    desc: req.body.desc,
     postTime: new Date(),
   };
   User.findOne({
@@ -128,17 +130,17 @@ router.post("/favour/post/:username", verify, function (req, res) {
   }).then((user) => {
     let arr = user.favour;
     let _id = req.body._id;
-    console.log(arr);
+    // console.log(arr);
     let result = arr.some((item) => {
       if (item._id == _id) {
         return true;
       }
     });
     if (result) {
-      res.status(200).json(user);
+      res.status(500).json(err);
       // alert("This movie has been collected, collection failed!")
       console.log("This movie has been collected, collection failed!");
-      console.log(user.favour);
+      // console.log(user.favour);
     } else {
       user.favour.unshift(postData);
       return user.save().then((newUser) => {
@@ -149,17 +151,68 @@ router.post("/favour/post/:username", verify, function (req, res) {
   });
 });
 
-//get All somebody
+//get All somebody'favour
 
-router.get("/favour/",verify, async (req, res) => {
+router.get("/favour/", verify, async (req, res) => {
   try {
-    const favour = await User.find({ username: req.query.username },{favour:1});
+    const favour = await User.find(
+      { username: req.query.username },
+      { favour: 1 }
+    );
     // const arrFavour = user.favour;
-    // console.log(arrFavour)
+    // console.log(favour[0].favour)
     res.status(200).json(favour);
   } catch (err) {
     res.json(500).json(err);
   }
 });
+
+//delete somebody's favour
+router.put("/favour/:id", verify, async (req, res) => {
+  try {
+    let user = await User.findOne({
+      username: req.body.username,
+    });
+    let _id = req.params.id;
+    // console.log(_id);
+    let flag;
+    user.favour.forEach((item, index) => {
+      if (item._id === _id) {
+        flag = true;
+        user.favour.splice(index, 1);
+      }else{
+        console.log("this movie has been deleted!");
+      }
+    });
+    if (flag === true) {
+      let newUser = await user.save();
+      res.status(200).json(newUser);
+    } else {
+      console.log(flag);
+      res.status(500).json(err);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//delete all favour
+
+router.post("/favour/deleteAll/", verify, async (req, res) => {
+  try {
+    let user = await User.findOne({
+      username: req.body.username,
+    });
+    let arr = user.favour;
+    arr.splice(0, arr.length);
+    let newUser = await user.save();
+    res.status(200).json(newUser);
+    console.log("delete Collection success!");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 
 module.exports = router;

@@ -38,7 +38,7 @@ const Home = ({ type }) => {
     getRandomLists();
     return () => (mounted = false);
   }, [type, genre, user]);
-  // console.log(username);
+  
   console.log(lists);
   return (
     <div className="home">

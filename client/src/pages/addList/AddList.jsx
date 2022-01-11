@@ -2,56 +2,57 @@
 import Sidebar from "../../components/sidebar/Sidebar";
 import FavourList from "../../components/favourList/favourList";
 import axios from "axios";
-import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../../authContext/AuthContext";
-import Input from '@mui/material/Input';
-
+import { useEffect, useState } from "react";
+// import { AuthContext } from "../../authContext/AuthContext";
+import TextField from "@mui/material/TextField";
+import SearchIcon from "@mui/icons-material/Search";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { deleteAllFavour } from "../../api/userFavour";
 import "./addList.scss";
 
-const AddList = () => {
+const AddList = ({username}) => {
   const [favour, setFavour] = useState([]);
-  const [username, setUsername] = useState("");
-  const { user } = useContext(AuthContext);
-  const getAll = async (username) => {
-    if (username === "") {
-      return;
-    }
-    try {
-      const res = await axios.get(`/users/favour/?username=${username}`, {
-        headers: {
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
-      setFavour(res.data[0].favour);
-      // console.log(res.data[0].favour);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const [keyWord, setkeyWord] = useState('');
+  
   useEffect(() => {
-    if (user) {
-      const user = JSON.parse(localStorage.getItem("user"));
-      setUsername(user.username);
-      console.log(username);
-    } else {
-      console.error();
-    }
+    const getAll = async (username) => {
+      if (username === "") {
+        return;
+      }
+      try {
+        const res = await axios.get(`/users/favour/?username=${username}`, {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        setFavour(res.data[0].favour);
+        // console.log(res.data[0].favour);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    // let timer=setInterval(getAll(username),3000);
     getAll(username);
-  }, [user, username]);
+    // return ()=>clearInterval(timer)
+  }, [username]);
+  const handleDeleteAll = (username) => {
+    deleteAllFavour(username);
+  };
 
+  const handelSearch=()=>{}
   console.log(username);
   console.log(favour);
   return (
     <div className="addList">
-      {/* <Navbar /> okok*/}
+      {/* <Navbar /> */}
       <Sidebar />
       <div className="container">
         <div className="left_container">
           {favour.length !== 0 ? (
             <>
               <h2>Collection of records</h2>
-              <FavourList favour={favour} />
+              <FavourList favour={favour} username={username} />
             </>
           ) : (
             <>
@@ -62,13 +63,19 @@ const AddList = () => {
           )}
         </div>
         <div className="right_container">
-          <div className="search_inout">
-            <p>jjjjj</p>
-            <p>jjjjj</p>
-            <p>jjjjj</p>
-            <p>jjjjj</p>
-            <p>jjjjj</p>
-            <p>jjjjj</p>
+          <div className="search_input">
+            <TextField
+              id="standard-basic"
+              variant="standard"
+              placeholder="search collection records....."
+              value={keyWord}
+              onChange={e => setkeyWord(e.target.value)}
+            />
+            <SearchIcon onClick={handelSearch}/>
+          </div>
+          <div className="deleteAll">
+            <DeleteIcon onClick={() => handleDeleteAll(username)} />
+            <span>delete all the collections</span>
           </div>
         </div>
       </div>

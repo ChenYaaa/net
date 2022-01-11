@@ -44,6 +44,7 @@ export default function ListItem({ index, item, username }) {
           _id: movie._id,
           imgTitle: movie.imgTitle,
           img: movie.img,
+          trailer:movie.trailer,
           video: movie.video,
           desc: movie.desc,
         },
@@ -88,7 +89,7 @@ export default function ListItem({ index, item, username }) {
       {isHovered && (
         <>
           <Link to={{ pathname: "/watch", movie: movie }}>
-            <video src={movie.trailer} autoPlay={true} loop />{" "}
+            <video src={movie.trailer} autoPlay={true} loop muted/>{" "}
           </Link>
           <div className="itemInfo">
             <div className="icons">
@@ -97,11 +98,7 @@ export default function ListItem({ index, item, username }) {
               </Link>
               {user ? (
                 <>
-                  {/* <Link className="play" to={{ pathname: "/addList", movie: movie,username:username }}> */}
-                  <Add className="icon" onClick={postFavour} />
-                  {/*  */}
-                  {/* </Link> */}
-                </>
+                  <Add className="icon" onClick={postFavour} />                </>
               ) : (
                 <>
                   <Add className="icon" onClick={handleOpen} />
