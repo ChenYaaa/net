@@ -94,7 +94,7 @@ export default function ListItem({ index, item, username }) {
           </Link>
           <div className="itemInfo">
             <div className="icons">
-              <Link className="play" to={{ pathname: "/watch", movie: movie }}>
+              <Link className="play" to={{ pathname: "/watch", movie: movie,username:username }}>
                 <PlayArrow className="icon" />
               </Link>
               {user ? (

@@ -216,7 +216,7 @@ router.post("/favour/deleteAll/", verify, async (req, res) => {
 router.post("/movieRecord/", verify, async (req, res) => {
   let data = {
     _id: req.body._id,
-    watchTime: req.body.time,
+    watchTime: req.body.watchTime,
     title: req.body.title,
     imgTitle: req.body.imgTitle,
     img: req.body.img,
@@ -225,28 +225,50 @@ router.post("/movieRecord/", verify, async (req, res) => {
     desc: req.body.desc,
     postTime: new Date(),
   };
-
-  const user = await User.findOne({
-    username: req.body.username,
-  });
-
-  let arr = user.record;
-  let _id = req.body._id;
-
-  let result = arr.some((item) => {
-    if (item._id == _id) {
-      return true;
-    }
-  });
-  if (result) {
-    res.status(500).json(err);
-  } else {
-    user.favour.unshift(data);
-    return user.save().then((newUser) => {
-      res.status(200).json(newUser);
-      console.log("Record of success!");
+  try {
+    const user = await User.findOne({
+      username: req.body.username,
     });
+
+    let arr = user.record;
+    let _id = req.body._id;
+
+    arr = arr.map((item) => {
+      if (item._id == _id) {
+        item = { ...item, ...data };
+        // console.log(item);
+      }
+      return item;
+    });
+    console.log(arr);
+    if (arr) {
+      user.record = [...arr];
+      return user.save().then((newUser) => {
+        res.status(200).json(newUser);
+        console.log("Record of success!");
+      });
+      // res.status(500).json(err);
+    } else {
+      user.record.unshift(data);
+      return user.save().then((newUser) => {
+        res.status(200).json(newUser);
+        console.log("Record of success!");
+      });
+    }
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
+router.get("/movieRecord/", verify, async (req, res) => {
+  try {
+    const favour = await User.find(
+      { username: req.query.username },
+      { record: 1 }
+    );
+    res.status(200).json(record);
+  } catch (err) {
+    res.json(500).json(err);
+  }
+});
 module.exports = router;

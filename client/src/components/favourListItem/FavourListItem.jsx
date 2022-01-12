@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import LinearProgress from "@mui/material/LinearProgress";
 // import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import HighlightOffTwoToneIcon from "@mui/icons-material/HighlightOffTwoTone";
-import { deleteFavour } from "../../api/userFavour";
+import { deleteFavour } from "../../api/user";
 import "./favourListItem.scss";
 
 const FavourListItem = ({ item, username }) => {

@@ -7,7 +7,7 @@ import { AuthContext } from "../../authContext/AuthContext";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { deleteAllFavour } from "../../api/userFavour";
+import { deleteAllFavour } from "../../api/user";
 import "./addList.scss";
 
 const AddList = () => {
@@ -39,7 +39,7 @@ const AddList = () => {
 
   useEffect(() => {
     if (user) {
-      const user = JSON.parse(localStorage.getItem("user"));
+      // const user = JSON.parse(localStorage.getItem("user"));
       setUsername(user.username);
       console.log(username);
     } else {

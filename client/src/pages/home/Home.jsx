@@ -16,7 +16,7 @@ const Home = ({ type }) => {
   useEffect(() => {
     let mounted = true;
     if (user) {
-      const user = JSON.parse(localStorage.getItem("user"));
+      // const user = JSON.parse(localStorage.getItem("user"));
       setUsername(user.username);
     } else {
       console.error();
@@ -36,10 +36,14 @@ const Home = ({ type }) => {
       }
     };
     getRandomLists();
-    return () => (mounted = false);
+    return () => {
+      mounted=false;
+      getRandomLists();
+    };
   }, [type, genre, user]);
   
   console.log(lists);
+  // console.log(user.username);
   return (
     <div className="home">
       <Navbar />
