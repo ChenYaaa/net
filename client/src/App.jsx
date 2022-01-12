@@ -10,21 +10,12 @@ import {
   Route,
   // Redirect,
 } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "./authContext/AuthContext";
-
+import { useEffect } from "react";
 const App = () => {
-  const { user } = useContext(AuthContext);
-  const [username, setUsername] = useState("");
   useEffect(() => {
-    if (user) {
-      const user = JSON.parse(localStorage.getItem("user"));
-      setUsername(user.username);
-      console.log(username);
-    } else {
-      console.error();
-    }
-  }, [username, user]);
+  }, []);
+
+  // console.log(user.favour)
   return (
     <Router>
       <Switch>
@@ -47,7 +38,7 @@ const App = () => {
           <Watch />
         </Route>
         <Route path="/myList">
-          <AddList username={username}/>
+          <AddList />
         </Route>
       </Switch>
     </Router>

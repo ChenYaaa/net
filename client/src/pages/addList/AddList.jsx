@@ -2,42 +2,53 @@
 import Sidebar from "../../components/sidebar/Sidebar";
 import FavourList from "../../components/favourList/favourList";
 import axios from "axios";
-import { useEffect, useState } from "react";
-// import { AuthContext } from "../../authContext/AuthContext";
+import { useEffect, useState,useContext } from "react";
+import { AuthContext } from "../../authContext/AuthContext";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteAllFavour } from "../../api/userFavour";
 import "./addList.scss";
 
-const AddList = ({ username }) => {
+const AddList = () => {
   const [favour, setFavour] = useState([]);
   const [searchFavour, setSearchFavour] = useState([]);
   const [keyWord, setkeyWord] = useState("");
   const [search, setSearch] = useState(false);
+  const { user } = useContext(AuthContext);
+  const [username, setUsername] = useState("");
+
+
+  const getAll = async (username) => {
+    if (username === "") {
+      return;
+    }
+    try {
+      const res = await axios.get(`/users/favour/?username=${username}`, {
+        headers: {
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      setFavour(res.data[0].favour);
+      // console.log(res.data[0].favour);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
-    const getAll = async (username) => {
-      if (username === "") {
-        return;
-      }
-      try {
-        const res = await axios.get(`/users/favour/?username=${username}`, {
-          headers: {
-            token:
-              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-          },
-        });
-        setFavour(res.data[0].favour);
-        // console.log(res.data[0].favour);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+    if (user) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      setUsername(user.username);
+      console.log(username);
+    } else {
+      console.error();
+    }
     // let timer=setInterval(getAll(username),3000);
     getAll(username);
     // return ()=>clearInterval(timer)
-  }, [username]);
+  }, [username,user]);
   const handleDeleteAll = (e, username) => {
     e.preventDefault();
     deleteAllFavour(username);

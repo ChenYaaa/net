@@ -241,7 +241,7 @@ router.post("/movieRecord/", verify, async (req, res) => {
   if (result) {
     res.status(500).json(err);
   } else {
-    user.favour.unshift(postData);
+    user.favour.unshift(data);
     return user.save().then((newUser) => {
       res.status(200).json(newUser);
       console.log("Record of success!");
