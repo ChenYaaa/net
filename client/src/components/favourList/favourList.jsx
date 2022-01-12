@@ -4,7 +4,7 @@ import "./favourList.scss";
 import FavourListItem from "../favourListItem/FavourListItem";
 // import axios from "axios";
 
-const FavourList = ({ username, favour, search }) => {
+const FavourList = ({ username, favour, search, searchFavour }) => {
   console.log(username);
   useEffect(() => {}, []);
   return (
@@ -12,7 +12,7 @@ const FavourList = ({ username, favour, search }) => {
       {search === true ? (
         <>
           <div className="movieBox">
-            {favour.map((item, i) => (
+            {searchFavour.map((item, i) => (
               <FavourListItem item={item} key={i} username={username} />
             ))}
           </div>

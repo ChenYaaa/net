@@ -118,7 +118,7 @@ router.post("/favour/post/:username", verify, function (req, res) {
   let postData = {
     // username:req.body.username,
     _id: req.body._id,
-    title:req.body.title,
+    title: req.body.title,
     imgTitle: req.body.imgTitle,
     img: req.body.img,
     trailer: req.body.trailer,
@@ -179,7 +179,7 @@ router.put("/favour/:id", verify, async (req, res) => {
       if (item._id === _id) {
         flag = true;
         user.favour.splice(index, 1);
-      }else{
+      } else {
         console.log("this movie has been deleted!");
       }
     });
@@ -212,5 +212,41 @@ router.post("/favour/deleteAll/", verify, async (req, res) => {
   }
 });
 
+//post user's movie record
+router.post("/movieRecord/", verify, async (req, res) => {
+  let data = {
+    _id: req.body._id,
+    watchTime: req.body.time,
+    title: req.body.title,
+    imgTitle: req.body.imgTitle,
+    img: req.body.img,
+    trailer: req.body.trailer,
+    video: req.body.video,
+    desc: req.body.desc,
+    postTime: new Date(),
+  };
+
+  const user = await User.findOne({
+    username: req.body.username,
+  });
+
+  let arr = user.record;
+  let _id = req.body._id;
+
+  let result = arr.some((item) => {
+    if (item._id == _id) {
+      return true;
+    }
+  });
+  if (result) {
+    res.status(500).json(err);
+  } else {
+    user.favour.unshift(postData);
+    return user.save().then((newUser) => {
+      res.status(200).json(newUser);
+      console.log("Record of success!");
+    });
+  }
+});
 
 module.exports = router;

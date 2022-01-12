@@ -12,8 +12,9 @@ import "./addList.scss";
 
 const AddList = ({ username }) => {
   const [favour, setFavour] = useState([]);
-  // const [searchFavour, setSearchFavour] = useState([]);
+  const [searchFavour, setSearchFavour] = useState([]);
   const [keyWord, setkeyWord] = useState("");
+  const [search, setSearch] = useState(false);
 
   useEffect(() => {
     const getAll = async (username) => {
@@ -42,12 +43,10 @@ const AddList = ({ username }) => {
     deleteAllFavour(username);
   };
 
-  let search = false;
-
   const keydownSearch = (e) => {
     if (e.keyCode === 13) {
-      search = true;
-      setFavour(
+      setSearch(true);
+      setSearchFavour(
         favour.filter(function (product) {
           return Object.keys(product).some(function (key) {
             return String(product[key]).toLowerCase().indexOf(keyWord) > -1;
@@ -59,8 +58,8 @@ const AddList = ({ username }) => {
 
   const handelSearch = (e) => {
     e.preventDefault();
-    search = true;
-    setFavour(
+    setSearch(true);
+    setSearchFavour(
       favour.filter(function (product) {
         return Object.keys(product).some(function (key) {
           return String(product[key]).toLowerCase().indexOf(keyWord) > -1;
@@ -68,8 +67,9 @@ const AddList = ({ username }) => {
       })
     );
   };
-  console.log(username);
-  console.log(favour);
+
+  console.log(search);
+  console.log(searchFavour);
   return (
     <div className="addList">
       {/* <Navbar /> kk*/}
@@ -79,7 +79,12 @@ const AddList = ({ username }) => {
           {favour.length !== 0 ? (
             <>
               <h2>Collection of records</h2>
-              <FavourList favour={favour} username={username} search={search} />
+              <FavourList
+                favour={favour}
+                username={username}
+                search={search}
+                searchFavour={searchFavour}
+              />
             </>
           ) : (
             <>
@@ -99,7 +104,6 @@ const AddList = ({ username }) => {
               onKeyDown={keydownSearch}
               onChange={(e) => {
                 setkeyWord(e.target.value);
-
               }}
             />
             <SearchIcon onClick={handelSearch} />
