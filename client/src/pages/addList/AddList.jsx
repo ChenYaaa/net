@@ -2,7 +2,7 @@
 import Sidebar from "../../components/sidebar/Sidebar";
 import FavourList from "../../components/favourList/favourList";
 import axios from "axios";
-import { useEffect, useState,useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../authContext/AuthContext";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
@@ -17,7 +17,6 @@ const AddList = () => {
   const [search, setSearch] = useState(false);
   const { user } = useContext(AuthContext);
   const [username, setUsername] = useState("");
-
 
   const getAll = async (username) => {
     if (username === "") {
@@ -39,18 +38,17 @@ const AddList = () => {
 
   useEffect(() => {
     if (user) {
-      // const user = JSON.parse(localStorage.getItem("user"));
       setUsername(user.username);
-      console.log(username);
     } else {
       console.error();
     }
-    // let timer=setInterval(getAll(username),3000);
     getAll(username);
-    // return ()=>clearInterval(timer)
-  }, [username,user]);
-  const handleDeleteAll = (e, username) => {
-    e.preventDefault();
+  }, [username, user, favour]);
+
+  // console.log(username);
+
+  const handleDeleteAll = (username) => {
+    // e.preventDefault();
     deleteAllFavour(username);
   };
 
@@ -78,9 +76,6 @@ const AddList = () => {
       })
     );
   };
-
-  console.log(search);
-  console.log(searchFavour);
   return (
     <div className="addList">
       {/* <Navbar /> kk*/}

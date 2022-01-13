@@ -1,11 +1,10 @@
 import { useEffect } from "react";
-
 import "./favourList.scss";
 import FavourListItem from "../favourListItem/FavourListItem";
 // import axios from "axios";
 
 const FavourList = ({ username, favour, search, searchFavour }) => {
-  console.log(username);
+  // console.log(username);
   useEffect(() => {}, []);
   return (
     <div className="favourList">

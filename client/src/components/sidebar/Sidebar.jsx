@@ -134,10 +134,10 @@ const Sidebar = () => {
             {[
               { name: "home", path: "/" },
               { name: " collect ", path: "/myList" },
-              { name: "Watch record", path: "/" },
+              { name: "Watch record", path: "/movieRecord" },
             ].map((text, index) => (
-              <Link to={text.path}>
-                <ListItem button key={index} >
+              <Link to={text.path} key={index}>
+                <ListItem button key={index}>
                   <ListItemIcon>
                     {index === 0 ? <HomeIcon /> : <></>}
                     {index === 1 ? <AddBoxIcon /> : <></>}

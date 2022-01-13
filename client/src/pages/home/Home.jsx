@@ -42,7 +42,7 @@ const Home = ({ type }) => {
     };
   }, [type, genre, user]);
   
-  console.log(lists);
+  // console.log(lists);
   // console.log(user.username);
   return (
     <div className="home">

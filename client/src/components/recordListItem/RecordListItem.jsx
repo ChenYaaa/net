@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import LinearProgress from "@mui/material/LinearProgress";
-// import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import HighlightOffTwoToneIcon from "@mui/icons-material/HighlightOffTwoTone";
-import { deleteFavour } from "../../api/user";
-import "./favourListItem.scss";
+import "./recordListItem.scss";
+import axios from "axios";
 
-const FavourListItem = ({ item, username }) => {
-  // console.log(item)
+const RecordListItem = ({ item, username }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [date, setDate] = useState("");
   const [progress, setProgress] = useState(0);
+  const [date, setDate] = useState("");
+  const [arr, setArr] = useState([]);
+  const [watchTime, setWatchTime] = useState([]);
   function rTime(date) {
     var json_date = new Date(date).toJSON();
     let newdate = new Date(new Date(json_date) + 8 * 3600 * 1000)
@@ -19,17 +19,37 @@ const FavourListItem = ({ item, username }) => {
       .replace(/\.[\d]{3}Z/, "");
     setDate(newdate);
   }
-  const handleDelete = (id, username) => {
-    // e.preventDefault();
-    deleteFavour(id, username);
+
+  const getRecord = async (username, id) => {
+    if (username === "") {
+      return;
+    }
+    try {
+      const res = await axios.get(
+        `/users/movieRecord/?username=${username}&_id=${id}`,
+        {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
+      // let arr=res.data[0].record;
+      setArr(res.data[0].record);
+      console.log(res.data[0].record);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
     rTime(item.postTime);
+    getRecord(username, item._id);
     setProgress(100);
-  }, [item.postTime]);
+  }, [item.postTime, username, item._id]);
+
   return (
-    <div className="favourListItem">
+    <div className="recordListItem">
       <div className="imgItem">
         <div
           className="img"
@@ -40,7 +60,7 @@ const FavourListItem = ({ item, username }) => {
           {isHovered && (
             <>
               <Link to={{ pathname: `/watch/${item._id}`, movie: item }}>
-                <video src={item.trailer} autoPlay={true} loop muted />{" "}
+                <video src={item.trailer} autoPlay={true} loop muted />
               </Link>
             </>
           )}
@@ -53,12 +73,10 @@ const FavourListItem = ({ item, username }) => {
           <p>{item.desc}</p>
           <p>add time：{date}</p>
         </div>
-        <HighlightOffTwoToneIcon
-          onClick={() => handleDelete(item._id, username)}
-        />
+        <HighlightOffTwoToneIcon />
       </div>
     </div>
   );
 };
 
-export default FavourListItem;
+export default RecordListItem;

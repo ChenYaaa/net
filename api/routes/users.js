@@ -233,15 +233,17 @@ router.post("/movieRecord/", verify, async (req, res) => {
     let arr = user.record;
     let _id = req.body._id;
 
+    let flag = false;
     arr = arr.map((item) => {
       if (item._id == _id) {
+        flag = true;
         item = { ...item, ...data };
         // console.log(item);
       }
       return item;
     });
-    console.log(arr);
-    if (arr) {
+    // console.log(arr);
+    if (flag === true) {
       user.record = [...arr];
       return user.save().then((newUser) => {
         res.status(200).json(newUser);
@@ -260,11 +262,25 @@ router.post("/movieRecord/", verify, async (req, res) => {
   }
 });
 
-router.get("/movieRecord/", verify, async (req, res) => {
+//get all record
+router.get("/allMovieRecord/", verify, async (req, res) => {
   try {
-    const favour = await User.find(
+    const record = await User.find(
       { username: req.query.username },
       { record: 1 }
+    );
+    res.status(200).json(record);
+  } catch (err) {
+    res.json(500).json(err);
+  }
+});
+
+
+router.get("/movieRecord/", verify, async (req, res) => {
+  try {
+    const record = await User.find(
+      { username: req.query.username },
+      { record: { $elemMatch: { _id: req.query._id } } }
     );
     res.status(200).json(record);
   } catch (err) {

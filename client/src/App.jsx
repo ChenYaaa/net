@@ -2,6 +2,7 @@ import "./app.scss";
 import Home from "./pages/home/Home";
 import Watch from "./pages/watch/Watch";
 import AddList from "./pages/addList/AddList";
+import Record from "./pages/record/Record";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import {
@@ -34,11 +35,14 @@ const App = () => {
         <Route path="/series">
           <Home type="series" />
         </Route>
-        <Route path="/watch">
+        <Route path="/watch/:_id">
           <Watch />
         </Route>
-        <Route path="/myList">
+        <Route path="/myList/">
           <AddList />
+        </Route>
+        <Route path="/movieRecord">
+          <Record />
         </Route>
       </Switch>
     </Router>

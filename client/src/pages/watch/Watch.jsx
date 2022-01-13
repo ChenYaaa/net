@@ -1,7 +1,7 @@
 import { ArrowBackOutlined } from "@material-ui/icons";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../authContext/AuthContext";
-import { useCallback, useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useMemo } from "react";
 import { postRecord } from "../../api/user";
 import "./watch.scss";
 
@@ -12,7 +12,7 @@ export default function Watch() {
   const [username, setUsername] = useState("");
   const { user } = useContext(AuthContext);
 
-  let getTime = useCallback((target) => {
+  const getTime = (target) => {
     target.addEventListener(
       "timeupdate",
       () => {
@@ -20,7 +20,35 @@ export default function Watch() {
       },
       false
     );
-  }, []);
+  };
+
+  const postData = useMemo(() => {
+    const data = {
+      username: username,
+      _id: movie._id,
+      watchTime: parseFloat(time),
+      title: movie.title,
+      imgTitle: movie.imgTitle,
+      img: movie.img,
+      trailer: movie.trailer,
+      video: movie.video,
+      desc: movie.desc,
+    };
+    return data;
+  }, [
+    username,
+    movie._id,
+    time,
+    movie.title,
+    movie.imgTitle,
+    movie.img,
+    movie.trailer,
+    movie.video,
+    movie.desc,
+  ]);
+  const handlePost = (postData) => {
+    postRecord(postData);
+  };
 
   useEffect(() => {
     if (user) {
@@ -30,26 +58,12 @@ export default function Watch() {
     }
     let video = document.getElementById("video");
     getTime(video);
-    // let play = true;
+    if (video.paused) {
+      handlePost(postData);
+    }
     // video.addEventListener('pause',handlePost(postData) );
-  }, [getTime, user]);
+  }, [user, postData]);
   console.log(time);
-  // let t = parseFloat(time);
-  let postData = {
-    username: username,
-    _id: movie._id,
-    watchTime: parseFloat(time),
-    title: movie.title,
-    imgTitle: movie.imgTitle,
-    img: movie.img,
-    trailer: movie.trailer,
-    video: movie.video,
-    desc: movie.desc,
-  };
-  const handlePost = (postData) => {
-    postRecord(postData);
-  };
-
   return (
     <div className="watch">
       <Link to="/">
