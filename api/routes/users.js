@@ -123,6 +123,7 @@ router.post("/favour/post/:username", verify, function (req, res) {
     img: req.body.img,
     trailer: req.body.trailer,
     video: req.body.video,
+    episode: req.body.episode,
     desc: req.body.desc,
     postTime: new Date(),
   };
@@ -139,7 +140,6 @@ router.post("/favour/post/:username", verify, function (req, res) {
     });
     if (result) {
       res.status(500).json(err);
-      // alert("This movie has been collected, collection failed!")
       console.log("This movie has been collected, collection failed!");
       // console.log(user.favour);
     } else {
@@ -165,7 +165,6 @@ router.get("/favour/", verify, async (req, res) => {
     res.json(500).json(err);
   }
 });
-
 //delete somebody's favour
 router.put("/favour/:id", verify, async (req, res) => {
   try {
@@ -222,7 +221,9 @@ router.post("/movieRecord/", verify, async (req, res) => {
     img: req.body.img,
     trailer: req.body.trailer,
     video: req.body.video,
+    episode: req.body.episode,
     desc: req.body.desc,
+    duration: req.body.duration,
     postTime: new Date(),
   };
   try {
@@ -238,7 +239,7 @@ router.post("/movieRecord/", verify, async (req, res) => {
       if (item._id == _id) {
         flag = true;
         item = { ...item, ...data };
-        // console.log(item);
+        console.log(item);
       }
       return item;
     });
@@ -275,16 +276,63 @@ router.get("/allMovieRecord/", verify, async (req, res) => {
   }
 });
 
-
 router.get("/movieRecord/", verify, async (req, res) => {
   try {
     const record = await User.find(
       { username: req.query.username },
-      { record: { $elemMatch: { _id: req.query._id } } }
+      { record: { $elemMatch: { _id: req.query._id } } },
+      { watchTime: 1 }
     );
     res.status(200).json(record);
   } catch (err) {
     res.json(500).json(err);
   }
 });
+
+//delete somebody's record
+router.put("/movieRecord/:id", verify, async (req, res) => {
+  try {
+    let user = await User.findOne({
+      username: req.body.username,
+    });
+    let _id = req.params.id;
+    // console.log(_id);
+    let flag;
+    user.record.forEach((item, index) => {
+      if (item._id === _id) {
+        flag = true;
+        user.record.splice(index, 1);
+      } else {
+        console.log("this movie has been deleted!");
+      }
+    });
+    if (flag === true) {
+      let newUser = await user.save();
+      res.status(200).json(newUser);
+    } else {
+      console.log(flag);
+      res.status(500).json(err);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//delete all record
+
+router.post("/movieRecord/deleteAll/", verify, async (req, res) => {
+  try {
+    let user = await User.findOne({
+      username: req.body.username,
+    });
+    let arr = user.record;
+    arr.splice(0, arr.length);
+    let newUser = await user.save();
+    res.status(200).json(newUser);
+    console.log("delete Collection success!");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
