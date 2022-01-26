@@ -1,76 +1,78 @@
 div.recordListItem {
-    margin-bottom: 50px;
-    div.imgItem {
-      display: flex;
-      width: 100%;
+  margin-bottom: 50px;
+  div.imgItem {
+    display: flex;
+    width: 100%;
+    &:hover {
+      svg.css-i4bv87-MuiSvgIcon-root {
+        display: block;
+      }
+    }
+    .css-i4bv87-MuiSvgIcon-root {
+      color: white;
+      display: none;
+    }
+    div.img {
+      flex: 4;
+      width: 90px;
+      height: 170px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
       &:hover {
-        svg.css-i4bv87-MuiSvgIcon-root {
-          display: block;
+        a {
+          z-index: 3;
         }
       }
-      .css-i4bv87-MuiSvgIcon-root {
-        color: white;
-        display: none;
+
+      img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        top: 0;
+        left: 0;
+        z-index: -1;
       }
-      div.img {
-        flex: 4;
-        width: 90px;
-        height: 170px;
-        overflow: hidden;
-        cursor: pointer;
-        position: relative;
-        &:hover {
-          a {
-            z-index: 3;
-          }
-        }
-  
-        img {
-          position: absolute;
+      a {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -2;
+        video {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          position: absolute;
           top: 0;
           left: 0;
-          z-index: -1;
-        }
-        a {
-          display: block;
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
-          z-index: -2;
-          video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-          }
-        }
-        .css-eglki6-MuiLinearProgress-root {
-          background-color: rgb(154 160 166);
-          position: absolute;
-          width: 100%;
-          bottom: 0;
-          z-index: 4;
-        }
-        .css-5xe99f-MuiLinearProgress-bar1 {
-          background-color: #990000;
         }
       }
-  
-      .imgDes {
-        flex: 6;
-        color: white;
-        h4,
-        p {
-          margin-left: 30px;
-        }
+      .css-eglki6-MuiLinearProgress-root {
+        background-color: rgb(154 160 166);
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        z-index: 4;
+      }
+      .css-5xe99f-MuiLinearProgress-bar1 {
+        background-color: #990000;
+      }
+    }
+
+    .imgDes {
+      flex: 6;
+      color: white;
+      h4.episode {
+        color: rgb(122, 118, 118);
+      }
+      h4,
+      p {
+        margin-left: 30px;
       }
     }
   }
-  
+}

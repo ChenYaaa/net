@@ -30,7 +30,7 @@ const Record = () => {
           },
         }
       );
-      console.log(res.data[0].record);
+      // console.log(res.data[0].record);
       setRecord(res.data[0].record);
     } catch (err) {
       console.log(err);
@@ -43,7 +43,7 @@ const Record = () => {
       console.error();
     }
     getAllRecord(username);
-  }, [user, username]);
+  }, [user, username, record, searchRecord]);
 
   const keydownSearch = (e) => {
     if (e.keyCode === 13) {
@@ -69,7 +69,6 @@ const Record = () => {
       })
     );
   };
-
   return (
     <div className="record">
       <Sidebar />

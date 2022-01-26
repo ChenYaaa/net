@@ -5,6 +5,8 @@ import AddList from "./pages/addList/AddList";
 import Record from "./pages/record/Record";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
+import Video from "./pages/video/Video";
+import NewPopular from "./pages/NewPopular/NewPopular";
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,8 +15,7 @@ import {
 } from "react-router-dom";
 import { useEffect } from "react";
 const App = () => {
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   // console.log(user.favour)
   return (
@@ -38,11 +39,17 @@ const App = () => {
         <Route path="/watch/:_id">
           <Watch />
         </Route>
+        <Route path="/newPopular">
+          <NewPopular />
+        </Route>
         <Route path="/myList/">
           <AddList />
         </Route>
         <Route path="/movieRecord">
           <Record />
+        </Route>
+        <Route path="/video/:_id">
+          <Video />
         </Route>
       </Switch>
     </Router>

@@ -26,7 +26,7 @@ const FavourListItem = ({ item, username }) => {
 
   useEffect(() => {
     rTime(item.postTime);
-    setProgress(100);
+    setProgress(0);
   }, [item.postTime]);
   return (
     <div className="favourListItem">
@@ -39,17 +39,35 @@ const FavourListItem = ({ item, username }) => {
           <img alt="complex" src={item.img} />
           {isHovered && (
             <>
-              <Link to={{ pathname: `/watch/${item._id}`, movie: item }}>
+              <Link
+                to={{
+                  pathname: `/video/${item._id}`,
+                  movie: item,
+                  username: username,
+                }}
+              >
                 <video src={item.trailer} autoPlay={true} loop muted />{" "}
               </Link>
             </>
           )}
-          <LinearProgress variant="determinate" value={progress} />
+          {progress === 0 ? (
+            <>
+              <LinearProgress
+                variant="determinate"
+                value={progress}
+                style={{ display: "none" }}
+              />
+            </>
+          ) : (
+            <>
+              <LinearProgress variant="determinate" value={progress} />
+            </>
+          )}
         </div>
 
         <div className="imgDes">
           <h4>{item.title}</h4>
-          {/* <h4>{item._id}</h4> */}
+          {/* <h4>{item._id}</h4> 61bc4f523d93bb4aa03f5f85 */}
           <p>{item.desc}</p>
           <p>add time：{date}</p>
         </div>

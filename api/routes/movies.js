@@ -39,6 +39,32 @@ router.put("/:id", verify, async (req, res) => {
   }
 });
 
+//add ThumbUp
+router.put("/ThumbUp/:id", async (req, res) => {
+  try {
+    const movieA = await Movie.findOneAndUpdate(
+      { _id: req.params.id },
+      { $inc: { ThumbUp: 1 } }
+    );
+    res.status(200).json(movieA);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//dowm ThumbDown
+router.put("/ThumbDown/:id", async (req, res) => {
+  try {
+    const movieA = await Movie.findOneAndUpdate(
+      { _id: req.params.id },
+      { $inc: { ThumbUp: -1 } }
+    );
+    res.status(200).json(movieA);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //DELETE
 
 router.delete("/:id", verify, async (req, res) => {
@@ -65,9 +91,18 @@ router.get("/find/:id", async (req, res) => {
   }
 });
 
+router.get("/episode/:id", verify, async (req, res) => {
+  try {
+    const episode = await Movie.find({ _id: req.params.id }, { episode: 1 });
+    res.status(200).json(episode);
+  } catch (err) {
+    res.json(500).json(err);
+  }
+});
+
 //GET RANDOM
 
-router.get("/random",  async (req, res) => {
+router.get("/random", async (req, res) => {
   const type = req.query.type;
   let movie;
   try {
@@ -92,12 +127,12 @@ router.get("/random",  async (req, res) => {
 
 router.get("/", async (req, res) => {
   // if (req.user.isAdmin) {
-    try {
-      const movies = await Movie.find();
-      res.status(200).json(movies.reverse());
-    } catch (err) {
-      res.status(500).json(err);
-    }
+  try {
+    const movies = await Movie.find();
+    res.status(200).json(movies.reverse());
+  } catch (err) {
+    res.status(500).json(err);
+  }
   // } else {
   //   res.status(403).json("You are not allowed!");
   // }

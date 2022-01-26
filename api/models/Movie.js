@@ -14,9 +14,10 @@ const MovieSchema = new mongoose.Schema(
     duration: { type: String },
     genre: { type: String },
     isSeries: { type: Boolean, default: false },
+    ThumbUp: { type: Number, default: 0 },
     episode: {
       type: Array,
-      defaut: "",
+      default: "",
     },
   },
   { timestamps: true }

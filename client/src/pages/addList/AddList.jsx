@@ -43,7 +43,7 @@ const AddList = () => {
       console.error();
     }
     getAll(username);
-  }, [username, user, favour]);
+  }, [username, user, favour, searchFavour]);
 
   // console.log(username);
 

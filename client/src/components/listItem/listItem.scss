@@ -43,9 +43,9 @@
       .icons {
         display: flex;
         margin-bottom: 10px;
-       a.play{
-         color: white;
-       }
+        a.play {
+          color: white;
+        }
 
         .icon {
           border: 2px solid white;
@@ -66,6 +66,9 @@
         .limit {
           border: 1px solid gray;
           padding: 1px 3px;
+          margin: 0 10px;
+        }
+        .year {
           margin: 0 10px;
         }
       }

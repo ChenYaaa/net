@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import { AuthContext } from "../../authContext/AuthContext";
 // import { useContext } from "react";
 
@@ -30,10 +30,16 @@ const style = {
 export default function ListItem({ index, item, username }) {
   const { user } = useContext(AuthContext);
   const [isHovered, setIsHovered] = useState(false);
+  // const [isClicked, setIsClicked] = useState(false);
+  // const [isUp, setIsUp] = useState(false);
   const [movie, setMovie] = useState({});
   const [open, setOpen] = React.useState(false);
+  const [changeColor1, setChangeColor1] = useState({});
+  const [changeColor2, setChangeColor2] = useState({});
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const ThumbUp = useRef(null);
+  const ThumbDown = useRef(null);
   // const [username, setUsername] = useState("");
   const postFavour = async () => {
     try {
@@ -47,6 +53,7 @@ export default function ListItem({ index, item, username }) {
           img: movie.img,
           trailer: movie.trailer,
           video: movie.video,
+          episode: movie.episode,
           desc: movie.desc,
         },
         {
@@ -59,6 +66,20 @@ export default function ListItem({ index, item, username }) {
       alert("sucess");
     } catch (err) {
       throw err;
+    }
+  };
+  const addThumbUp = async (id) => {
+    try {
+      await axios.put("/movies/ThumbUp/" + id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const addThumbDown = async (id) => {
+    try {
+      await axios.put("/movies/ThumbDown/" + id);
+    } catch (err) {
+      console.log(err);
     }
   };
   useEffect(() => {
@@ -74,8 +95,9 @@ export default function ListItem({ index, item, username }) {
       }
     };
     getMovie();
+
     return () => (mounted = false);
-  }, [item]);
+  }, [item, movie]);
   // console.log(movie);
   // console.log(username);
 
@@ -89,7 +111,13 @@ export default function ListItem({ index, item, username }) {
       <img src={movie?.imgSm} alt="" />
       {isHovered && (
         <>
-          <Link to={{ pathname: `/watch/${movie._id}`, movie: movie }}>
+          <Link
+            to={{
+              pathname: `/video/${movie._id}`,
+              movie: movie,
+              username: username,
+            }}
+          >
             <video src={movie.trailer} autoPlay={true} loop muted />{" "}
           </Link>
           <div className="itemInfo">
@@ -97,7 +125,7 @@ export default function ListItem({ index, item, username }) {
               <Link
                 className="play"
                 to={{
-                  pathname: `/watch/${movie._id}`,
+                  pathname: `/video/${movie._id}`,
                   movie: movie,
                   username: username,
                 }}
@@ -136,16 +164,39 @@ export default function ListItem({ index, item, username }) {
                   </Modal>
                 </>
               )}
+              <ThumbUpAltOutlined
+                className="icon"
+                ref={ThumbUp}
+                style={changeColor1}
+                onClick={() => {
+                  addThumbUp(movie._id);
+                  setChangeColor1({ color: "red" });
+                  setChangeColor2({});
+                }}
+              />
 
-              <ThumbUpAltOutlined className="icon" />
-              <ThumbDownOutlined className="icon" />
+              <ThumbDownOutlined
+                className="icon"
+                ref={ThumbDown}
+                style={changeColor2}
+                onClick={() => {
+                  addThumbDown(movie._id);
+                  setChangeColor2({ color: "red" });
+                  setChangeColor1({});
+                }}
+              />
             </div>
             <div className="itemInfoTop">
               <span>{movie.duration}</span>
-              <span className="limit">+{movie.limit}</span>
-              <span>{movie.year}</span>
+              <span className="limit">
+                {movie?.episode.length}{" "}
+                {movie?.episode.length > 1 ? "episodes" : "episode"}
+              </span>
+              <span className="year">{movie.year}</span>
+              <span>liks:{movie.ThumbUp}</span>
             </div>
             <div className="desc">{movie.title}</div>
+            <div className="desc">{movie._id}</div>
             <div className="desc">{movie.desc}</div>
             <div className="genre">{movie.genre}</div>
           </div>

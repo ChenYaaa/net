@@ -34,3 +34,5 @@ app.use("/api/lists", listRoute);
 app.listen(8800, () => {
   console.log("Backend server is running!");
 });
+// MONGO_URL = "mongodb://localhost:27017/MovieDB"
+

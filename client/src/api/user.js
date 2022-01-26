@@ -17,10 +17,44 @@ const deleteFavour = (id, username) => {
   }
 };
 
+const deleteRecord = (id, username) => {
+  try {
+    axios.put(
+      "/users/movieRecord/" + id,
+      { username: username },
+      {
+        headers: {
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const deleteAllFavour = (username) => {
   try {
     axios.post(
       "/users/favour/deleteAll/",
+      { username: username },
+      {
+        headers: {
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const deleteAllRecord = (username) => {
+  try {
+    axios.post(
+      "/users/movieRecord/deleteAll/",
       { username: username },
       {
         headers: {
@@ -46,4 +80,10 @@ const postRecord = (data) => {
   }
 };
 
-export { deleteFavour, deleteAllFavour, postRecord };
+export {
+  deleteFavour,
+  deleteAllFavour,
+  postRecord,
+  deleteRecord,
+  deleteAllRecord,
+};

@@ -42,7 +42,6 @@ const Navbar = () => {
     };
   };
 
-  
   return (
     <div className={isScrolled ? "navbar scrolled" : "navbar"}>
       <div className="container">
@@ -62,7 +61,9 @@ const Navbar = () => {
           <Link to="/movies" className="link">
             <span className="navbarmainLinks">Movies</span>
           </Link>
-          <span>New and Popular</span>
+          <Link to="/newPopular" className="link">
+            <span>New and Popular</span>
+          </Link>
           <Link to="/myList" className="link">
             <span>My List</span>
           </Link>
