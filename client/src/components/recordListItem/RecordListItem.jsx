@@ -4,7 +4,6 @@ import LinearProgress from "@mui/material/LinearProgress";
 import HighlightOffTwoToneIcon from "@mui/icons-material/HighlightOffTwoTone";
 import "./recordListItem.scss";
 import { deleteRecord } from "../../api/user";
-
 // import axios from "axios";
 
 const RecordListItem = ({ item, username }) => {

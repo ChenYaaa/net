@@ -2,8 +2,8 @@ div.searchDiv {
   div.container {
     div.navBox {
       height: 30px;
-      margin-left: 40px;
-      margin-right: 40px;
+      margin-left: 80px;
+      margin-right: 80px;
       // background-color: gray;
       margin-top: 100px;
       display: flex;
@@ -21,8 +21,8 @@ div.searchDiv {
     }
     div.filterBox {
       margin-top: 20px;
-      margin-left: 40px;
-      margin-right: 40px;
+      margin-left: 80px;
+      margin-right: 80px;
       width: 400px;
       height: 200px;
       background-color: gray;
@@ -52,10 +52,12 @@ div.searchDiv {
       flex-direction: row;
       div.left-l {
         flex: 7;
+        height: 100%;
       }
       div.right-r {
         flex: 3;
-        background-color: #990000;
+        height: 100%;
+        // background-color: #990000;
         margin-top: 140px;
       }
     }

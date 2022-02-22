@@ -19,7 +19,7 @@ const Video = () => {
   const [duration, setDuration] = useState(0);
   const [time, setTime] = useState(0);
   const [ep, setEp] = useState(0);
-  // console.log(movie.isSeries);
+  console.log(typeof movie.isSeries);
 
   const changeSource = (item, i) => {
     setSource(item);
@@ -98,10 +98,16 @@ const Video = () => {
 
   const Duration = useCallback(
     (target) => {
-      if (movie.isSeries === "false") {
-        setDuration(target.duration);
-      } else {
-        console.log("err");
+      try {
+        if (movie.isSeries === false) {
+          target.onloadedmetadata = function () {
+            setDuration(target.duration);
+          };
+        } else {
+          // setEp()
+        }
+      } catch (err) {
+        console.log(err);
       }
     },
     [movie.isSeries]
@@ -172,6 +178,7 @@ const Video = () => {
                 alt=""
                 onClick={() => {
                   changeSource(item, i);
+                  setEp(i);
                 }}
               />
             </li>
