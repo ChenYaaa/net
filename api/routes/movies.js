@@ -138,4 +138,29 @@ router.get("/", async (req, res) => {
   // }
 });
 
+router.post("/like_movie_search", (req, res) => {
+  let searchValue = req.body.searchValue;
+  // console.log(searchValue);
+  var str = ".*" + searchValue + ".*$";
+  var reg = new RegExp(str);
+
+  Movie.find({ title: { $regex: reg, $options: "i" } }, (err, data) => {
+    // $options:'i' 表示忽略大小写
+    if (err) {
+      console.log(err);
+      return res.status(500).json({
+        result: 1,
+        error_info: err.message,
+      });
+    }
+    // console.log(data)
+    let length = data.length;
+    return res.status(200).json({
+      result: 0,
+      count: length,
+      searchMovie: data,
+    });
+  });
+});
+
 module.exports = router;

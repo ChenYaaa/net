@@ -53,9 +53,37 @@
       display: flex;
       align-items: center;
 
+      a.searchLink {
+        color: white;
+        z-index: 12;
+      }
+
+      div.search {
+        position: relative;
+        input {
+          position: absolute;
+          outline: none;
+          border: 1px solid white;
+          background-color: black;
+          border-radius: 45px;
+          width: 200px;
+          right: -40px;
+          top: -10px;
+          height: 20px;
+          color: white;
+        }
+      }
+
       .icon {
         margin: 0px 15px;
         cursor: pointer;
+      }
+      .searchIcon {
+        z-index: 11;
+      }
+      .searchIcon:hover {
+        input {
+        }
       }
 
       img {
@@ -86,7 +114,7 @@
           }
         }
       }
-      a{
+      a {
         color: white;
         text-decoration: none;
       }

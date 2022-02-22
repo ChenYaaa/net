@@ -55,6 +55,7 @@ export default function ListItem({ index, item, username }) {
           video: movie.video,
           episode: movie.episode,
           desc: movie.desc,
+          isSeries: movie.isSeries,
         },
         {
           headers: {
@@ -189,8 +190,9 @@ export default function ListItem({ index, item, username }) {
             <div className="itemInfoTop">
               <span>{movie.duration}</span>
               <span className="limit">
-                {movie?.episode.length}{" "}
-                {movie?.episode.length > 1 ? "episodes" : "episode"}
+                episode
+                {/* {movie?.episode.length}{" "}
+                {movie?.episode.length > 1 ? "episodes" : "episode"} */}
               </span>
               <span className="year">{movie.year}</span>
               <span>liks:{movie.ThumbUp}</span>

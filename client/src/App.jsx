@@ -7,6 +7,8 @@ import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Video from "./pages/video/Video";
 import NewPopular from "./pages/NewPopular/NewPopular";
+import Search from "./pages/search/Search";
+import Test from "./pages/test/test";
 import {
   BrowserRouter as Router,
   Switch,
@@ -50,6 +52,15 @@ const App = () => {
         </Route>
         <Route path="/video/:_id">
           <Video />
+        </Route>
+        <Route path="/video/:_id">
+          <Video />
+        </Route>
+        <Route path="/search/:keyWord">
+          <Search />
+        </Route>
+        <Route path="/test/">
+          <Test />
         </Route>
       </Switch>
     </Router>

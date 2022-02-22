@@ -2,22 +2,22 @@ import React, {
   useEffect,
   useRef,
   useState,
-  // useMemo,
+  useMemo,
   useCallback,
 } from "react";
 import { useLocation } from "react-router-dom";
-// import { postRecord } from "../../api/user";
+import { postRecord } from "../../api/user";
 import "./video.scss";
 
 const Video = () => {
   const location = useLocation();
   const movie = location.movie;
-  // const username = location.username;
+  const username = location.username;
   const player1 = useRef(null);
   const [episode, setEpisode] = useState([]);
   const [source, setSource] = useState(movie.video);
   const [duration, setDuration] = useState(0);
-  // const [time, setTime] = useState(0);
+  const [time, setTime] = useState(0);
   const [ep, setEp] = useState(0);
   // console.log(movie.isSeries);
 
@@ -51,69 +51,87 @@ const Video = () => {
     //   }
     // };
   };
+  const getTime = (target) => {
+    target.addEventListener(
+      "timeupdate",
+      () => {
+        setTime(target.currentTime);
+      },
+      false
+    );
+  };
 
-  // const handlePost = (postData) => {
-  //   postRecord(postData);
-  // };
+  const handlePost = (postData) => {
+    postRecord(postData);
+  };
 
-  // const postData = useMemo(() => {
-  //   const data = {
-  //     username: username,
-  //     _id: movie._id,
-  //     watchTime: parseFloat(time),
-  //     title: movie.title,
-  //     imgTitle: movie.imgTitle,
-  //     img: movie.img,
-  //     trailer: movie.trailer,
-  //     video: movie.video,
-  //     episode: movie.episode,
-  //     desc: movie.desc,
-  //     duration: parseFloat(duration),
-  //   };
-  //   return data;
-  // }, [
-  //   username,
-  //   movie._id,
-  //   time,
-  //   movie.title,
-  //   movie.imgTitle,
-  //   movie.img,
-  //   movie.trailer,
-  //   movie.video,
-  //   movie.desc,
-  //   duration,
-  //   movie.episode,
-  // ]);
+  const postData = useMemo(() => {
+    const data = {
+      username: username,
+      _id: movie._id,
+      watchTime: parseFloat(time),
+      title: movie.title,
+      imgTitle: movie.imgTitle,
+      img: movie.img,
+      trailer: movie.trailer,
+      video: movie.video,
+      episode: movie.episode,
+      desc: movie.desc,
+      duration: parseFloat(duration),
+      isSeries: movie.isSeries,
+    };
+    return data;
+  }, [
+    username,
+    movie._id,
+    time,
+    movie.title,
+    movie.imgTitle,
+    movie.img,
+    movie.trailer,
+    movie.video,
+    movie.desc,
+    duration,
+    movie.episode,
+    movie.isSeries,
+  ]);
 
   const Duration = useCallback(
     (target) => {
-      if (movie.isSeries === false) {
-        setDuration(target.current.duration);
+      if (movie.isSeries === "false") {
+        setDuration(target.duration);
       } else {
         console.log("err");
       }
     },
     [movie.isSeries]
   );
+  // const Duration=function(){
+  //   if(movie.isSeries==='false')
+  // }
+
   // const setCurrentTime = (target) => {};
   useEffect(() => {
-    // let player = document.getElementById("player");
+    let player = document.getElementById("player");
     setEpisode(movie.episode);
     // setCurrentTime(player1);
-    Duration(player1);
+    Duration(player);
     chengStyle();
+    getTime(player);
 
-    // if (player.paused) {
-    //   handlePost(postData);
-    // }
+    if (player.paused) {
+      handlePost(postData);
+    }
+
     console.log(ep);
-  }, [movie.episode, ep, Duration, duration]);
+  }, [movie.episode, ep, Duration, duration, postData]);
+  console.log(movie);
   return (
     <div className="video">
       <div className="mainLeft">
         <video
           id="player"
-          ref={player1}
+          // ref={player1}
           poster={movie.img}
           className="video"
           progress="true"

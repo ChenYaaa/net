@@ -17,9 +17,15 @@ export default function Login() {
     //   alert("email or password can not be empty");
     // }
     try {
-      await login({ email, password }, dispatch);
-      history.push("/");
+      if (email === "" || password === "") {
+        alert("email or password is error");
+        history.push("/login");
+      } else {
+        await login({ email, password }, dispatch);
+        history.push("/");
+      }
     } catch (err) {
+      console.log(err);
     }
   };
   return (
@@ -62,9 +68,8 @@ export default function Login() {
             </b>
           </span>
           <small>
-            This page is protected  to ensure you're not a
-            bot. <b>Learn more</b>.
-            {/* by Google reCAPTCHA */}
+            This page is protected to ensure you're not a bot. <b>Learn more</b>
+            .{/* by Google reCAPTCHA */}
           </small>
         </form>
       </div>

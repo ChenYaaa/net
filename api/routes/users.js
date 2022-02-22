@@ -125,6 +125,7 @@ router.post("/favour/post/:username", verify, function (req, res) {
     video: req.body.video,
     episode: req.body.episode,
     desc: req.body.desc,
+    isSeries: req.body.isSeries,
     postTime: new Date(),
   };
   User.findOne({
@@ -224,6 +225,7 @@ router.post("/movieRecord/", verify, async (req, res) => {
     episode: req.body.episode,
     desc: req.body.desc,
     duration: req.body.duration,
+    isSeries: req.body.isSeries,
     postTime: new Date(),
   };
   try {

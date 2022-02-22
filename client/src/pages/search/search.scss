@@ -1,0 +1,63 @@
+div.searchDiv {
+  div.container {
+    div.navBox {
+      height: 30px;
+      margin-left: 40px;
+      margin-right: 40px;
+      // background-color: gray;
+      margin-top: 100px;
+      display: flex;
+      flex-direction: row;
+      .css-1oaaite-MuiTypography-root-MuiLink-root {
+        color: white;
+        line-height: 30px;
+      }
+      .css-1oaaite-MuiTypography-root-MuiLink-root:first-child {
+        border-bottom: 5px solid #990000;
+      }
+      .css-1oaaite-MuiTypography-root-MuiLink-root:not(:first-child) {
+        margin-left: 30px;
+      }
+    }
+    div.filterBox {
+      margin-top: 20px;
+      margin-left: 40px;
+      margin-right: 40px;
+      width: 400px;
+      height: 200px;
+      background-color: gray;
+      color: white;
+      ul {
+        padding: 5px;
+        display: flex;
+        flex-direction: row;
+        span {
+          line-height: 30px;
+        }
+        li {
+          list-style: none;
+          margin-left: 10px;
+          line-height: 30px;
+          .css-1oaaite-MuiTypography-root-MuiLink-root {
+            color: white;
+          }
+        }
+      }
+    }
+    .word {
+      color: white;
+    }
+    div.container_left {
+      display: flex;
+      flex-direction: row;
+      div.left-l {
+        flex: 7;
+      }
+      div.right-r {
+        flex: 3;
+        background-color: #990000;
+        margin-top: 140px;
+      }
+    }
+  }
+}
