@@ -68,12 +68,7 @@ const NewPopular = () => {
           Item Two
         </TabPanel>
       </Box>
-      {/* <div className="new">
-        <h3>NEW</h3>
-      </div>
-      <div className="popular">
-        <h3>POPULAR</h3>
-      </div> */}
+      
     </div>
   );
 };

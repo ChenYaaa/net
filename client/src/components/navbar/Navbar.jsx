@@ -25,6 +25,7 @@ const style = {
 const Navbar = () => {
   const { user } = useContext(AuthContext);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   const { dispatch } = useContext(AuthContext);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -41,6 +42,7 @@ const Navbar = () => {
       window.onscroll = null;
     };
   };
+  console.log(searchValue);
 
   return (
     <div className={isScrolled ? "navbar scrolled" : "navbar"}>
@@ -69,7 +71,19 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="right">
-          <Search className="icon" />
+          <div className="search">
+            <input
+              type="text"
+              onChange={(e) => setSearchValue(e.target.value)}
+            />
+          </div>
+          <Link
+            to={{ pathname: `/search/${searchValue}`, value: searchValue }}
+            className="searchLink"
+          >
+            <Search className="icon searchIcon" />
+          </Link>
+
           <span>KID</span>
           <Notifications className="icon" />
           <img
