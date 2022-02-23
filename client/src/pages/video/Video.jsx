@@ -1,6 +1,6 @@
 import React, {
   useEffect,
-  useRef,
+  // useRef,
   useState,
   useMemo,
   useCallback,
@@ -13,7 +13,7 @@ const Video = () => {
   const location = useLocation();
   const movie = location.movie;
   const username = location.username;
-  const player1 = useRef(null);
+  // const player1 = useRef(null);
   const [episode, setEpisode] = useState([]);
   const [source, setSource] = useState(movie.video);
   const [duration, setDuration] = useState(0);
@@ -21,10 +21,10 @@ const Video = () => {
   const [ep, setEp] = useState(0);
   console.log(typeof movie.isSeries);
 
-  const changeSource = (item, i) => {
+  const changeSource = (item, i, target) => {
     setSource(item);
     setEp(i + 1);
-    player1.current.load();
+    target.load();
   };
   const chengStyle = () => {
     var ul = document.getElementById("ul");
@@ -112,6 +112,8 @@ const Video = () => {
     },
     [movie.isSeries]
   );
+
+  console.log();
   // const Duration=function(){
   //   if(movie.isSeries==='false')
   // }

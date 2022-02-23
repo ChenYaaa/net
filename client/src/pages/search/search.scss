@@ -57,8 +57,17 @@ div.searchDiv {
       div.right-r {
         flex: 3;
         height: 100%;
-        // background-color: #990000;
+        // background-color: white;
         margin-top: 140px;
+        margin-right: 50px;
+        color: black;
+        h4 {
+          color: white;
+          margin-bottom: 10px;
+        }
+        div.relevant {
+          background-color: white;
+        }
       }
     }
   }

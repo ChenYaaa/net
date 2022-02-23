@@ -68,7 +68,6 @@ const NewPopular = () => {
           Item Two
         </TabPanel>
       </Box>
-      
     </div>
   );
 };

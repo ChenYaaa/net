@@ -17,7 +17,7 @@ const Search = () => {
 
   // console.log(value);
 
-  const getSearchResult = async () => {
+  const getSearchResult = async (value) => {
     try {
       const res = await axios.post("/movies/like_movie_search/", {
         searchValue: value,
@@ -30,8 +30,8 @@ const Search = () => {
   };
 
   useEffect(() => {
-    getSearchResult();
-  });
+    getSearchResult(value);
+  }, [value]);
   // console.log(searchList);
 
   const IsUp = function (isUp) {
@@ -132,7 +132,12 @@ const Search = () => {
             </div>
             <SearchList searchList={searchList} />
           </div>
-          <div className="right-r"></div>
+          <div className="right-r">
+            <h4>relevant recommendation</h4>
+            <div className="relevant">
+              <p>hhhhhhhhh</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
