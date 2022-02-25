@@ -138,6 +138,7 @@ router.get("/", async (req, res) => {
   // }
 });
 
+//获取查询内容
 router.post("/like_movie_search", (req, res) => {
   let searchValue = req.body.searchValue;
   // console.log(searchValue);
@@ -161,6 +162,14 @@ router.post("/like_movie_search", (req, res) => {
       searchMovie: data,
     });
   });
+});
+
+//获取最新内容
+router.get("/recentMovie", async (req, res) => {
+  const today = new Date();
+  try {
+    const data=
+  } catch (err) {}
 });
 
 module.exports = router;
