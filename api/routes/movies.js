@@ -167,9 +167,9 @@ router.post("/like_movie_search", (req, res) => {
 //获取最新内容
 router.get("/recentMovie", async (req, res) => {
   const today = new Date();
-  try {
-    const data=
-  } catch (err) {}
+  // try {
+  //   const data=
+  // } catch (err) {}
 });
 
 module.exports = router;
