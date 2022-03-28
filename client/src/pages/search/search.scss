@@ -60,6 +60,7 @@ div.searchDiv {
         // background-color: white;
         margin-top: 140px;
         margin-right: 50px;
+        margin-left: 20px;
         color: black;
         h4 {
           color: white;
@@ -67,6 +68,40 @@ div.searchDiv {
         }
         div.relevant {
           background-color: white;
+          ul{
+            span{
+              display: inline-block;
+              width: 20px;
+              height: 20px;
+              border-radius: 15px;
+              background-color: #726e6e;
+              text-align: center;
+            }
+            list-style-type: none;
+            padding: 10px;
+            li{
+              margin-top: 10px;
+              &:nth-child(1){
+                span{
+                  background-color: #990000;
+                }
+              }
+              &:nth-child(2){
+                span{
+                  background-color: #db0b0b;
+                }
+              }
+              &:nth-child(3){
+                span{
+                  background-color: #fd1010;
+                }
+              }
+              a{
+                color: black;
+                padding-left: 10px;
+              }
+            }
+          }
         }
       }
     }

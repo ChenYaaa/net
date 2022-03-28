@@ -135,7 +135,58 @@ const Search = () => {
           <div className="right-r">
             <h4>relevant recommendation</h4>
             <div className="relevant">
-              <p>hhhhhhhhh</p>
+              <ul>
+                <li><span>1</span>
+                  <Link href="#" underline="none">
+                    {"aoteman 1"}
+                  </Link>
+                </li>
+                <li><span>2</span>
+                  <Link href="#" underline="none">
+                    {"aoteman 2"}
+                  </Link>
+                </li>
+                <li><span>3</span>
+                  <Link href="#" underline="none">
+                    {"aoteman 3"}
+                  </Link>
+                </li>
+                <li><span>4</span>
+                  <Link href="#" underline="none">
+                    {"aoteman 4"}
+                  </Link>
+                </li>
+                <li><span>5</span>
+                  <Link href="#" underline="none">
+                    {"aoteman 5"}
+                  </Link>
+                </li>
+                <li><span>6</span>
+                  <Link href="#" underline="none">
+                    {"aoteman 6"}
+                  </Link>
+                </li>
+                <li><span>7</span>
+                  <Link href="#" underline="none">
+                    {"aoteman 7"}
+                  </Link>
+                </li>
+                <li><span>8</span>
+                  <Link href="#" underline="none">
+                    {"aoteman 8"}
+                  </Link>
+                </li>
+                <li><span>9</span>
+                  <Link href="#" underline="none">
+                    {"aoteman 9"}
+                  </Link>
+                </li>
+                <li><span>10</span>
+                  <Link href="#" underline="none">
+                    {"aoteman 10"}
+                  </Link>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
